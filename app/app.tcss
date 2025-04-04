@@ -1,0 +1,69 @@
+
+#dialog {
+    grid-size: 2;
+    grid-gutter: 1 2;
+    grid-rows: 1fr 3;
+    padding: 0 1;
+    width: 60;
+    height: 11;
+    border: thick $background 80%;
+    background: $surface;
+}
+
+#question {
+    column-span: 2;
+    height: 1fr;
+    width: 1fr;
+    content-align: center middle;
+}
+
+Button {
+    width: 100%;
+}
+
+
+#add_keybind_dialog {
+    grid-size: 2;
+    width: 90;
+    grid-gutter: 1 2;
+    grid-rows: auto 1fr 1fr 1fr; /* Adjust rows to auto and allocate space for inputs */
+    height: 25;
+    border: thick $background 80%;
+    background: $surface;
+}
+
+#keys, #description, #categories {
+    column-span: 2;
+    height: auto; /* Allow the height to adjust based on content */
+    width: 1fr;
+    content-align: center middle;
+}
+
+/* If you want to set a fixed height for these inputs */
+#keys, #description, #categories {
+    height: 3; /* Adjust this value to fit your design */
+}
+
+#add_category_dialog {
+    grid-size: 2;
+    grid-gutter: 1 2;
+    grid-rows: 1fr 3;
+    padding: 0 1;
+    width: 60;
+    height: 11;
+    border: thick $background 80%;
+    background: $surface;
+}
+
+#new_category {
+    column-span: 2;
+    height: 1fr;
+    width: 1fr;
+    content-align: center middle;
+}
+
+
+AddCategoryScreen, QuitScreen , AddKeyBindScreen {
+    align: center middle
+}
+
