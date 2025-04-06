@@ -67,3 +67,12 @@ AddCategoryScreen, QuitScreen , AddKeyBindScreen {
     align: center middle
 }
 
+SideBar{
+    height: 100%;
+}
+
+.header {
+    text-align: center;
+    content-align: center middle;
+    height: 1;
+}

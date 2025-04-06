@@ -10,6 +10,7 @@ This is a Text User Interface (TUI) application that allows users to manage keyb
 - **Category Management**: Users can select a category to filter keybindings by category.
 - **Scrollable Grid**: A scrollable table is available to display the keybindings, making navigation seamless.
 - **Keybinding Display**: The keybindings are displayed with their associated keys and descriptions.
+- **SQLite Database**: Uses SQLite as the database to store and retrieve keybindings and categories.
 - **Quit Dialog**: The application provides a quit dialog to confirm whether users want to exit the application.
 
 ## Installation
@@ -27,7 +28,7 @@ This is a Text User Interface (TUI) application that allows users to manage keyb
 
 3. Run the application:
     ```bash
-    python app/main.py
+    python src/main.py
     ```
 
 ## Usage
@@ -39,7 +40,9 @@ This is a Text User Interface (TUI) application that allows users to manage keyb
 
 ## Screenshots
 
-_(Add screenshots here once your app is visually complete.)_
+![Showcase photo](assets/Showcase.png)
+
+
 
 ## TODO
 

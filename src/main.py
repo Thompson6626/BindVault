@@ -9,7 +9,7 @@ from textual.containers import  Grid
 import asyncio
 
 
-from db import init_db, get_categories, get_keybinds, insert_category, insert_keybind
+from db import Category, KeyBind, init_db, get_categories, get_keybinds, insert_category, insert_keybind
 
 
 class AddKeyBindScreen(ModalScreen):
@@ -31,7 +31,8 @@ class AddKeyBindScreen(ModalScreen):
             keybind = insert_keybind(keys_input, description_input, category_id)
             if keybind:
                 KEYBINDS[keybind.category_id].append(keybind)
-            
+                self.app.keybind_grid.add_to_grid(keybind)
+
         self.app.pop_screen()
 
 class AddCategoryScreen(ModalScreen):
@@ -50,7 +51,8 @@ class AddCategoryScreen(ModalScreen):
             category = insert_category(category_name)
             if category:
                 CATEGORIES.append(category)
-            
+                self.app.sidebar.populate_sidebar()
+
         self.app.pop_screen()
 
 class QuitScreen(ModalScreen):
@@ -90,6 +92,9 @@ class Sidebar(Vertical):
         for category in CATEGORIES:
             self.list_view.append(ListItem(Static(category.name), id=f"category-{category.id}"))
 
+    def add_sidebar(self,category: Category) :
+        self.list_view.append(ListItem(Static(category.name),id=f"category-{category.id}"))
+
     async def on_list_view_selected(self, event: ListView.Selected) -> None:
         """Handle selection events from ListView."""
         try:
@@ -97,13 +102,6 @@ class Sidebar(Vertical):
             self.on_category_selected(category_id)
         except (IndexError, ValueError):
             self.on_category_selected(0)
-
-    def on_key(self, event) -> None:
-        """Handle up/down key navigation in the sidebar."""
-        if event.key == "up":
-            self.list_view.action_cursor_up()
-        elif event.key == "down":
-            self.list_view.action_cursor_down()
 
 
 class KeyBindGrid(VerticalScroll):
@@ -128,13 +126,8 @@ class KeyBindGrid(VerticalScroll):
 
         for kb in keybinds:
             self.table.add_row(kb.keys, kb.description, key=kb.id)
-
-    def on_key(self, event) -> None:
-        """Handle key navigation within the grid."""
-        if event.key == "up":
-            self.table.action_cursor_up()
-        elif event.key == "down":
-            self.table.action_cursor_down()
+    def add_to_grid(self, keybind: KeyBind):
+        self.table.add_row(keybind.keys,keybind.description,key=keybind.keys)
 
 
 class KeyBindApp(App):
